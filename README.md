@@ -10,7 +10,7 @@ Features
 - Has LESSphp baked in
 - Redirects after user logs in
 - Cleans up wp_head()
-- Removes menu items (comments, links)
+- Removes menu items (remove comments, links, or whatever you don't want)
 - Mobile device detection
 - Setup for Admin dashboard and login logos
 - Custom menu output

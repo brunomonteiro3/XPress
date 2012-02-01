@@ -1,0 +1,18 @@
+<!-- [cached]  February 1, 2012, 12:28 am -->
+<nav id="menu-footer" class="menu-menu-footer-container"><ul id="menu-footer" class="menu"><li id="menu-item-356" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-356"><a href="http://localhost:8888/wp-crm/home-3">Home</a></li>
+<li id="menu-item-351" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-351"><a href="http://localhost:8888/wp-crm/past-germs">Past Germs</a>
+<ul class="sub-menu">
+	<li id="menu-item-352" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-352"><a href="http://localhost:8888/wp-crm/rules">Rules</a>
+	<ul class="sub-menu">
+		<li id="menu-item-353" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-353"><a href="http://localhost:8888/wp-crm/about">About</a>
+		<ul class="sub-menu">
+			<li id="menu-item-354" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-354"><a href="http://localhost:8888/wp-crm/news">News</a></li>
+		</ul>
+</li>
+	</ul>
+</li>
+</ul>
+</li>
+<li id="menu-item-355" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-355"><a href="http://localhost:8888/wp-crm/contact-us">Contact Us</a></li>
+</ul></nav>
+<!-- // [cached] -->
