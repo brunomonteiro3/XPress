@@ -1,0 +1,25 @@
+/* Hello, I'm a CSS-style comment */
+.my_scope  {
+  .some_color {
+    color: red;
+    .inner_block {
+      text-decoration: underline;
+    }
+  }
+  .bold {
+    font-weight: bold;
+    color: blue;
+  }
+}
+
+.a_block {
+  .my_scope .some_color;
+  .my_scope .some_color .inner_block;
+}
+
+.another_block {
+  // the alternative syntax
+  .my_scope > .bold;
+}
+.testers{color:blue;}
+/* Hello, I'm a CSS-style comment */

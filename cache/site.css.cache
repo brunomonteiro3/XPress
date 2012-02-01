@@ -1,0 +1,17 @@
+a:4:{s:4:"root";s:65:"/Applications/MAMP/htdocs/wp-crm/wp-content/themes/base/site.less";s:8:"compiled";s:343:".my_scope .some_color { color:red; }
+.my_scope .some_color .inner_block { text-decoration:underline; }
+.my_scope .bold {
+  font-weight:bold;
+  color:blue;
+}
+.a_block {
+  color:red;
+  text-decoration:underline;
+}
+.a_block .inner_block { text-decoration:underline; }
+.another_block {
+  font-weight:bold;
+  color:blue;
+}
+.testers { color:blue; }
+";s:5:"files";a:1:{s:65:"/Applications/MAMP/htdocs/wp-crm/wp-content/themes/base/site.less";i:1327609396;}s:7:"updated";i:1328053873;}

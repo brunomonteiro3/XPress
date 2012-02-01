@@ -1,0 +1,16 @@
+.my_scope .some_color { color:red; }
+.my_scope .some_color .inner_block { text-decoration:underline; }
+.my_scope .bold {
+  font-weight:bold;
+  color:blue;
+}
+.a_block {
+  color:red;
+  text-decoration:underline;
+}
+.a_block .inner_block { text-decoration:underline; }
+.another_block {
+  font-weight:bold;
+  color:blue;
+}
+.testers { color:blue; }
