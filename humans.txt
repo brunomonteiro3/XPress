@@ -6,12 +6,6 @@
 		"role"     : "Web Developer + Designer",
 		"site"     : "http://ahermosilla.com",
 		"location" : "Clovis, CA"
-	},
-	{
-		"name"	   : "Steve Darval,
-		"role"     : "Web Developer",
-		"site"     : "http://www.stevedarval.com/",
-		"location" : "Fresno, CA"
 	}
 	
 }
