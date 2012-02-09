@@ -1,7 +1,7 @@
 <?php get_header(); ?>
 <!-- page.php -->
 </section>
-<section id="content-primary" class="page-width">
+<section id="content-primary" class="container">
 
 <?php if (have_posts()) : while (have_posts()) : the_post(); ?> 
  

@@ -24,6 +24,7 @@ define('URI',$_SERVER['REQUEST_URI']);
 define('IS_MOBILE', is_mobile());
 
 
+// add_filter('user_can_richedit' , create_function('' , 'return false;') , 50);
 
 // Based on user agent detect if mobile device
 // http://www.dannyherran.com/2011/02/detect-mobile-browseruser-agent-with-php-ipad-iphone-blackberry-and-others/
@@ -219,7 +220,22 @@ if($is_logged_in){
 
 // For logged in and dashboard
 if($is_backend ){
-  
+
+    
+    wp_register_script('admin_extend', TPML."/js/admin.js");
+    wp_enqueue_script('admin_extend');
+
+    /*
+    // To add adminstration pages/tabs to backend
+    include_once(DIR_EXTND.'class.wp_options.php');
+    $options = new WP_options();
+    $options->addPage('Options','Options','manage_options','options-plus','options_plus');
+    $options->init();
+    function options_plus(){
+      echo 'Hello World';
+    }
+    */
+ 
 }
 
 // function for caching menus
@@ -286,12 +302,14 @@ function auto_compile_less($less_file, $css_file) {
   $less_file = __DIR__ . '/' . $less_file;
   $css_file  = __DIR__ . '/' . $css_file;
   
-
-  if (file_exists($cache_file)) {
-    $cache = unserialize(file_get_contents($cache_file));
-  } else {
+ 
+  // Comment for testing/ uncomment for live
+  // if (file_exists($cache_file)) {
+  //  $cache = unserialize(file_get_contents($cache_file));
+  // } else {
     $cache = $less_file;
-  }
+  //}
+
 
   $new_cache = lessc::cexecute($cache);
 

@@ -1,3 +1,10 @@
+@color_pri : #ccc;
+@color_sec : #fff;
+
+
+// Links
+@linkColor: #08c;
+@linkColorHover: darken(@linkColor, 15%);
 
 article, aside, details, figcaption, figure, footer, header, hgroup, nav, section { display: block; }
 audio, canvas, video { display: inline-block; *display: inline; *zoom: 1; }
@@ -11,9 +18,9 @@ body, button, input, select, textarea { font-family: sans-serif; color: #555; }
 ::-moz-selection { background: #fe57a1; color: #fff; text-shadow: none; }
 ::selection { background: #fe57a1; color: #fff; text-shadow: none; }
 
-a { color: #00e; text-decoration:none;}
+a { color: @linkColor; text-decoration:none;}
 a:visited { }
-a:hover { }
+a:hover { color:@linkColorHover;}
 a:focus { outline:none; }
 a:hover, a:active { outline: 0; }
 
@@ -58,20 +65,31 @@ input:invalid, textarea:invalid { background-color: #f0dddd; }
 table { border-collapse: collapse; border-spacing: 0; }
 td { vertical-align: top; }
 
+// GRID
+// --------------------------------------------------
+
+// Default 940px grid
+@gridColumns: 12;
+@gridColumnWidth: 60px;
+@gridGutterWidth: 20px;
+@gridRowWidth: (@gridColumns * @gridColumnWidth) + (@gridGutterWidth * (@gridColumns - 1));
+
+// Fluid grid
+@fluidGridColumnWidth: 6.382978723%;
+@fluidGridGutterWidth: 2.127659574%;
+
+
+@import "css/mixins.less";
+@import "css/forms.less";
+@import "css/tables.less";
 
 /* ==|== primary styles =====================================================
    Author: 
    ========================================================================== */
 /* ==|== media queries ====================================================== */
 
-@media only screen and (min-width: 480px) {
-
-
-}
-
-@media only screen and (min-width: 768px) {
-
-}
+/* Include only for responsive designs */
+@import "css/responsive.less";
 
 /* ==|== print styles ======================================================= */
  
