@@ -35,5 +35,14 @@ IS_MOBILE // (boolean) Is browser mobile?
 ```
 Functions
 ---------
-the_doc_title() - Handles document <title>
-menu_cache( $args = array()) - Works the same and handles the same parameters as wp_nav_menu(), but also caches menu
+```php
+<?php 
+
+// Handles document <title>
+the_doc_title(); 
+
+// Works the same and handles the same parameters as wp_nav_menu(), but also caches menu
+menu_cache( $args = array()); 
+
+?>
+```
