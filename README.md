@@ -20,14 +20,19 @@ Features
 
 Constants
 ---------
-SITE_URL (string) Site's URL
-TMPL_URL (string) Template directory URL
-DIR_TMPL (string) Path of template directory
-DIR_CACHE (string) Path of cache directory
-DIR_EXTND (string) Path of extensions (classes, includes, etc.)
-URI (string) Current request
-IS_MOBILE (boolean) Is browser mobile?
+```php
+<?php 
 
+SITE_URL // (string) Site's URL
+TMPL_URL // (string) Template directory URL
+DIR_TMPL // (string) Path of template directory
+DIR_CACHE // (string) Path of cache directory
+DIR_EXTND // (string) Path of extensions (classes, includes, etc.)
+URI // (string) Current request
+IS_MOBILE // (boolean) Is browser mobile?
+
+?>
+```
 Functions
 ---------
 the_doc_title() - Handles document <title>
