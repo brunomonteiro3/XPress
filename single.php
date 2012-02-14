@@ -8,6 +8,7 @@
   <div class="index-entry">
     <?php the_content(); ?>
     <div class="clearfix"></div>
+    <?php comments_template(); ?> 
     <?php edit_post_link('EDIT', '<p>', '</p>'); ?>
   </div>
 </div>

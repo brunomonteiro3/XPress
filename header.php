@@ -40,5 +40,7 @@
         // If the site will be using a caching plugin
         // wp_nav_menu( $args );
      ?>
+     <?php get_search_form(); ?>
 </header>
+
 

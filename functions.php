@@ -18,12 +18,14 @@
 // Commonly called functions into constants
 define('SITE_URL', get_bloginfo('url'));
 define('TMPL_URL', get_bloginfo('template_url'));
-define('DIR_CACHE',__DIR__ .'/cache/');
-define('DIR_EXTND',__DIR__ .'/extend/');
+define('DIR_TMPL',get_template_directory());
+define('DIR_CACHE',DIR_TMPL.'/cache/');
+define('DIR_EXTND',DIR_TMPL .'/extend/');
 define('URI',$_SERVER['REQUEST_URI']);
 define('IS_MOBILE', is_mobile());
 
 
+// Kill WYSIWYG
 // add_filter('user_can_richedit' , create_function('' , 'return false;') , 50);
 
 // Based on user agent detect if mobile device
@@ -35,6 +37,36 @@ function is_mobile(){
     return false;
   }
 }
+
+/*
+if(IS_MOBILE){
+  add_filter('template_include', 'template_mobile', 1, 1); 
+
+  // make one template handle all the mobile space
+  function template_mobile($template) { 
+    global $post;
+    return DIR_TMPL . '/mobile.php'; 
+   }
+}
+*/
+  function search_hilighter($content, $terms) {
+    $do_not_highlight = array( "a", "A", "is", "Is", "the", "The", "and", "And" );
+    $search_term = $terms;
+    foreach ($search_term as $search_t) {
+            preg_match_all("/$search_t+/i", $content, $matches);
+            foreach ($matches as $match) {
+                if (!in_array($match[0],$do_not_highlight)) {
+                $content = str_replace($match[0], "[m]" . $match[0] . "[mm]", $content);
+                }
+            }
+        }
+ 
+        $find = array("[m]","[mm]");
+        $replace = array('<span class="hilite-result">','</span>');
+        $highlighted_content = str_replace($find,$replace,$content);   
+    echo $highlighted_content;
+ 
+  }
 
 // Find current user
 // $user =  wp_get_current_user();
@@ -107,13 +139,15 @@ add_action('do_feed_atom', 'fb_disable_feed', 1);
 // Handles outputting document title
 function the_doc_title(){
   global $paged;
+  print_r($s);
  echo '[';
  if (function_exists('is_tag') && is_tag()) {
       single_tag_title("Tag Archive for &quot;"); echo '&quot; - '; 
     } elseif (is_archive()){
       wp_title(''); echo ' In the Past - '; 
     } elseif (is_search()) {
-          echo 'Search for &quot;'.wp_specialchars($s).'&quot; - '; 
+          echo 'Search for &quot;'. wp_specialchars(get_search_query()) .'&quot; - '; 
+        
     } elseif (!(is_404()) && (is_single()) || (is_page())) {
       wp_title(''); echo ' - '; 
     } elseif (is_404()) {
@@ -222,7 +256,7 @@ if($is_logged_in){
 if($is_backend ){
 
     
-    wp_register_script('admin_extend', TPML."/js/admin.js");
+    wp_register_script('admin_extend', DIR_TMPL."/js/admin.js");
     wp_enqueue_script('admin_extend');
 
     /*
@@ -420,18 +454,18 @@ wp_nav_menu( array(
 
 */
 
-/*
+
 // Redirect admins to the dashboard and other users elsewhere after login
 add_filter( 'login_redirect', 'login_redirect', 10, 3 );
 function login_redirect( $redirect_to, $request, $user ) {
 
   // Set redirects for roles
   $redirects = array(
-      'administrator' => SITE_URL .'/wp-admin/', 
+      'administrator' => SITE_URL .'/wp-adminss/', 
       'editor'        => SITE_URL .'/editors/',  
       'author'        => SITE_URL .'/wp-admin/',  
       'contributor'   => SITE_URL .'/wp-admin/', 
-      'subscriber'    => SITE_URL .'/wp-admin/',
+      'subscriber'    => SITE_URL .'/subscriber/',
       'default'       => SITE_URL 
   );
 
@@ -446,7 +480,7 @@ function login_redirect( $redirect_to, $request, $user ) {
       return $return;
     }
 }
-*/
+
 
 // Comment out on live site
 include_once( DIR_EXTND .'debug.php');
