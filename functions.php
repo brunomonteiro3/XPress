@@ -25,6 +25,26 @@ define('URI',$_SERVER['REQUEST_URI']);
 define('IS_MOBILE', is_mobile());
 
 
+function site_shortcode($atts) {
+   extract(shortcode_atts(array(
+       'type' => '',
+   ), $atts));
+   switch ($type) {
+    case 'url':
+        echo "i equals 0";
+        break;
+    case 1:
+        echo "i equals 1";
+        break;
+    case 2:
+        echo "i equals 2";
+        break;
+    }
+   return SITE_URL;
+}
+add_shortcode('site', 'site_shortcode');
+
+
 // Kill WYSIWYG
 // add_filter('user_can_richedit' , create_function('' , 'return false;') , 50);
 
@@ -67,7 +87,11 @@ if(IS_MOBILE){
     echo $highlighted_content;
  
   }
-
+// So you can send HTML emails, mate!  
+function mail_content_type(){
+    return "text/html";
+}
+add_filter( 'wp_mail_content_type','mail_content_type' );
 // Find current user
 // $user =  wp_get_current_user();
 

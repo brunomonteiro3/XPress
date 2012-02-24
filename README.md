@@ -33,8 +33,8 @@ IS_MOBILE // (boolean) Is browser mobile?
 
 ?>
 ```
-Functions
----------
+Template Functions
+------------------
 ```php
 <?php 
 

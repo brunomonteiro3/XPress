@@ -40,6 +40,7 @@ function list_hooked_functions($tag=false){
 }
 
 // this can live in /themes/mytheme/functions.php, or maybe as a dev plugin?
+// Ideally placed in header.php
 function get_template_name() {
   foreach ( debug_backtrace() as $called_file ) {
     foreach ( $called_file as $index ) {
@@ -55,5 +56,7 @@ function get_template_name() {
   $template_file = array_pop(explode('/themes/', basename($template_file)));
   return $template_file . ' > '. $template_name ;
 }
+
+
 
 ?>
