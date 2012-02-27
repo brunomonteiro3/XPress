@@ -23,11 +23,13 @@ Constants
 ```php
 <?php 
 
-SITE_URL // (string) Site's URL
-TMPL_URL // (string) Template directory URL
+SITE_URL // (string) Site's URL -  same as get_bloginfo('url')
+WP_URL // (strong) Access WordPress URL - same as get_bloginfo('wpurl')
+TMPL_URL // (string) Template directory URL 
 DIR_TMPL // (string) Path of template directory
 DIR_CACHE // (string) Path of cache directory
 DIR_EXTND // (string) Path of extensions (classes, includes, etc.)
+DIR_ADMIN // // (string) Path of WordPress wp-admin folder
 URI // (string) Current request
 IS_MOBILE // (boolean) Is browser mobile?
 
@@ -43,6 +45,21 @@ the_doc_title();
 
 // Works the same and handles the same parameters as wp_nav_menu(), but also caches menu
 menu_cache( $args = array()); 
+
+/*
+
+$fh - File Handler $_FILE
+$post_id - ID of parent post
+$title - title Of images
+$to_thumb - make it parent post thumnail?
+
+@usage
+if ($_FILES['thumbnail']){
+  insert_attachment($_FILES['thumbnail'],$ID, $_POST['post']['post_title'], true);
+}
+
+*/
+insert_attachment($fh, $post_id, $title, $to_thumb = false);
 
 ?>
 ```
