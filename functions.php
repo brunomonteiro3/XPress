@@ -21,6 +21,7 @@ define('TMPL_URL', get_bloginfo('template_url'));
 define('DIR_TMPL',get_template_directory());
 define('DIR_CACHE',DIR_TMPL.'/cache/');
 define('DIR_EXTND',DIR_TMPL .'/extend/');
+define('DIR_ADMIN',ABSPATH. 'wp-admin/');
 define('URI',$_SERVER['REQUEST_URI']);
 define('IS_MOBILE', is_mobile());
 
@@ -92,6 +93,20 @@ function mail_content_type(){
     return "text/html";
 }
 add_filter( 'wp_mail_content_type','mail_content_type' );
+
+// http://wordpress.org/extend/plugins/welcome-email-editor/
+add_filter('retrieve_password_title', 'lost_pass_title', 10, 1 );
+add_filter('retrieve_password_message', 'lost_pass_message', 10, 2 );
+
+
+function lost_pass_title(){
+  return 'Title';
+}
+
+function lost_pass_message(){
+  return 'Message';
+}
+
 // Find current user
 // $user =  wp_get_current_user();
 
@@ -412,6 +427,93 @@ function post_pagination($pages = '', $range = 3){
          if ($paged < $pages-1 &&  $paged+$range-1 < $pages && $showitems < $pages) echo "<a href='".get_pagenum_link($pages)."'>&raquo;</a>";
          echo "</div>\n";
      }
+}
+
+//http://sltaylor.co.uk/blog/customizing-new-user-email-pluggable-function/
+// Redefine user notification function  
+if ( !function_exists('wp_new_user_notification') ) {  
+    function wp_new_user_notification( $user_id, $plaintext_pass = '' ) {  
+        $user = new WP_User($user_id);  
+  
+        $user_login = stripslashes($user->user_login);  
+        $user_email = stripslashes($user->user_email);  
+  
+        $message  = sprintf(__('New user registration on your blog %s:'), get_option('blogname')) . "\r\n\r\n";  
+        $message .= sprintf(__('Username: %s'), $user_login) . "\r\n\r\n";  
+        $message .= sprintf(__('E-mail: %s'), $user_email) . "\r\n";  
+  
+        @wp_mail(get_option('admin_email'), sprintf(__('[%s] New User Registration'), get_option('blogname')), $message);  
+  
+        if ( emptyempty($plaintext_pass) )  
+            return;  
+  
+        $message  = __('Hi there,') . "\r\n\r\n";  
+        $message .= sprintf(__("Welcome to %s! Here's how to log in:"), get_option('blogname')) . "\r\n\r\n"; 
+        $message .= wp_login_url() . "\r\n"; 
+        $message .= sprintf(__('Username: %s'), $user_login) . "\r\n"; 
+        $message .= sprintf(__('Password: %s'), $plaintext_pass) . "\r\n\r\n"; 
+        $message .= sprintf(__('If you have any problems, please contact me at %s.'), get_option('admin_email')) . "\r\n\r\n"; 
+        $message .= __('Adios!');  
+  
+        wp_mail($user_email, sprintf(__('[%s] Your username and password'), get_option('blogname')), $message);  
+  
+    }  
+}  
+
+// http://wordpress.stackexchange.com/questions/4307/how-can-i-add-an-image-upload-field-directly-to-a-custom-write-panel/4413#4413
+/*
+
+$fh - File Handler $_FILE
+$post_id - ID of parent post
+$title - title Of images
+$to_thumb - make it parent post thumnail?
+
+if ($_FILES['thumbnail']){
+  insert_attachment($_FILES['thumbnail'],$ID, $_POST['post']['post_title'], true);
+}
+
+*/
+
+function insert_attachment($fh, $post_id, $title, $to_thumb = false) {
+  $success = false;
+ if($fh['error'] == 0){
+      require_once(DIR_ADMIN .'/includes/file.php');
+      $accept_types = array('image/jpg','image/jpeg','image/gif','image/png');
+
+      if(in_array($fh['type'],$accept_types)){
+        $wp_file = wp_handle_upload($fh, array('test_form' => false));
+              $file = $wp_file['file'];
+
+              // Set up options array to add this file as an attachment
+              $attachment = array(
+                'post_mime_type' => $fh['type'],
+                'post_title' => $title,
+                'post_content' => '',
+                'post_status' => 'inherit',
+                'post_parent' => $post_id
+              );
+              // Run the wp_insert_attachment function. This adds the file to the media library and generates the thumbnails. If you wanted to attch this image to a post, you could pass the post id as a third param and it'd magically happen.
+              $attach_id = wp_insert_attachment($attachment, $file);
+
+              require_once(DIR_ADMIN .'includes/image.php');
+              $attach_data = wp_generate_attachment_metadata($attach_id, $file);
+              wp_update_attachment_metadata($attach_id,  $attach_data);
+              update_post_meta($post_id, '_thumbnail_id',$attach_id);
+
+              $success = true;
+      }
+
+    }
+
+    return $success;
+}
+
+function post_errors($errors = array()){
+  if(count($errors) > 0){
+    foreach($errors as $error){
+      echo '<div class="notification error">'."$error</div>";
+    }
+  }
 }
 
 /*
