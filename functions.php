@@ -26,23 +26,24 @@ define('URI',$_SERVER['REQUEST_URI']);
 define('IS_MOBILE', is_mobile());
 
 
+if ( function_exists( 'add_image_size' ) ) { 
+  add_image_size( 'pet_thumb', 440, 300, true ); 
+}
+
 function site_shortcode($atts) {
    extract(shortcode_atts(array(
-       'type' => '',
+       'info' => '',
    ), $atts));
-   switch ($type) {
+
+   $return = '';
+   switch ($info) {
     case 'url':
-        echo "i equals 0";
-        break;
-    case 1:
-        echo "i equals 1";
-        break;
-    case 2:
-        echo "i equals 2";
+        $return = SITE_URL;
         break;
     }
-   return SITE_URL;
+   return $return;
 }
+
 add_shortcode('site', 'site_shortcode');
 
 
