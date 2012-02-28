@@ -203,6 +203,19 @@ function the_doc_title(){
    echo ' ]';
 }
 
+// http://wpsnipp.com/index.php/css/alternate-odd-even-post-class/
+// Adding odd even classes to posts
+function oddeven_post_class($classes) {
+   static $current_class = 'odd-post';
+   $classes[] = $current_class;
+   $current_class = ($current_class == 'odd-post') ? 'even-post' : 'odd-post';
+   return $classes;
+}
+add_filter ('post_class' ,'oddeven_post_class');
+
+
+
+
 function page_group_menu(){
   global $post;
   $cache_file = DIR_CACHE .'pm.'.$post->ID.'.html.cache';
@@ -294,7 +307,19 @@ if($is_logged_in){
 // For logged in and dashboard
 if($is_backend ){
 
-    
+    if (isset($_GET['activated'] ) && $pagenow ==	"themes.php" ){
+    	function install_notice(){ 
+    		// Hide default message and show install message
+    		?>
+    		<style>#message2{display:none;}</style>
+        	<?php
+        	echo '<div class="updated"><p>Thanks for installing the best theme ever!</p></div>';
+	}
+	add_action('admin_notices','install_notice');
+	// Redirect to options page if need be
+	//wp_redirect( 'themes.php?page=theme_options_page' );
+		
+	}
     wp_register_script('admin_extend', DIR_TMPL."/js/admin.js");
     wp_enqueue_script('admin_extend');
 
