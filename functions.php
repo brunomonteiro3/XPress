@@ -46,6 +46,36 @@ function site_shortcode($atts) {
 
 add_shortcode('site', 'site_shortcode');
 
+// http://themocracy.com/2010/02/wp-cron-automating-scheduling/
+add_filter('cron_schedules', 'add_weekly_cron');
+
+function add_weekly_cron($schedules ) {
+  $schedules['weekly'] = array(
+    'interval' => 604800, //that's how many seconds in a week, for the unix timestamp
+    'display' => __('Once Weekly')
+  );
+  return $schedules;
+}
+
+
+add_action('weekly_events', 'weekly_events_fnc');
+
+// activate 'CRON' event
+wp_schedule_event(time(), 'weekly', 'weekly_events');
+
+// deactivate 'CRON' event
+// wp_clear_scheduled_hook('my_hourly_event');
+
+
+function weekly_events_fnc() {
+  // Do this once a week
+  $args =  array( 'post_type' => array( 'memorial', 'pet_adopt')); 
+  $args['post_status'] = 'pending';
+  $query = new WP_Query(  $args);
+  print_r($query);
+}
+
+
 
 // Kill WYSIWYG
 // add_filter('user_can_richedit' , create_function('' , 'return false;') , 50);
@@ -541,6 +571,43 @@ function post_errors($errors = array()){
     }
   }
 }
+
+//http://wpengineer.com/2214/adding-input-fields-to-the-comment-form/
+add_filter( 'preprocess_comment', 'verify_comment_captcha' );
+function verify_comment_captcha( $commentdata ) {
+    if ( !isset( $_POST['captcha'])){
+       wp_die( __( 'Whoa! Did you use the number 3 for the CAPTCHA?' ));
+    } else {
+      if($_POST['captcha'] !== '3'){
+        wp_die( __( 'Whoa! Did you use the number 3 for the CAPTCHA?' ));
+      }
+    }
+    return $commentdata;
+}
+
+function theme_comment($comment, $args, $depth) {
+   $GLOBALS['comment'] = $comment; ?>
+   <li <?php comment_class(); ?> id="li-comment-<?php comment_ID() ?>">
+     <div id="comment-<?php comment_ID(); ?>">
+      <div class="comment-meta">
+        <span class="author-meta">
+         <?php echo get_avatar($comment, $size = 32 ); ?>
+         <?php printf(__('<cite class="fn">%s</cite>'), get_comment_author_link()) ?>
+       </span>
+       <span class="datetime">
+        <?php printf(__('%1$s'), get_comment_date('F jS, Y')) ?><?php edit_comment_link(__('(Edit)'),'  ','') ?></span>
+      </div>
+      <div class="comment-text">
+      <?php comment_text() ?>
+    </div>
+      <div class="reply">
+         <?php comment_reply_link(array_merge( $args, array('depth' => $depth, 'max_depth' => $args['max_depth']))) ?>
+        <?php if ($comment->comment_approved == '0') : ?> <em class="comment-status"><?php _e('Your comment is awaiting moderation.') ?></em><?php endif; ?>
+      </div>
+      
+     </div>
+<?php
+        }
 
 /*
 // Use if you have private or protected content

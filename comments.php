@@ -9,16 +9,13 @@
 	} ?>
 
 <?php if ( have_comments() ) : ?>
-	
-	<h2 id="comments"><?php comments_number('No Responses', 'One Response', '% Responses' );?></h2>
-
 	<div class="navigation">
 		<div class="next-posts"><?php previous_comments_link() ?></div>
 		<div class="prev-posts"><?php next_comments_link() ?></div>
 	</div>
 
 	<ol class="commentlist">
-		<?php wp_list_comments(); ?>
+		<?php wp_list_comments('type=comment&callback=theme_comment'); ?>
 	</ol>
 
 	<div class="navigation">
@@ -40,7 +37,7 @@
 
 <?php if ( comments_open() ) : ?>
 
-<div id="respond">
+<div class="respond">
 
 	<h2><?php comment_form_title( 'Leave a Reply', 'Leave a Reply to %s' ); ?></h2>
 
@@ -59,31 +56,25 @@
 			<p>Logged in as <a href="<?php echo get_option('siteurl'); ?>/wp-admin/profile.php"><?php echo $user_identity; ?></a>. <a href="<?php echo wp_logout_url(get_permalink()); ?>" title="Log out of this account">Log out &raquo;</a></p>
 
 		<?php else : ?>
-
-			<div>
-				<input type="text" name="author" id="author" value="<?php echo esc_attr($comment_author); ?>" size="22" tabindex="1" <?php if ($req) echo "aria-required='true'"; ?> />
+			<div class="input-block">
 				<label for="author">Name <?php if ($req) echo "(required)"; ?></label>
+				<input type="text" name="author" id="author" value="<?php echo esc_attr($comment_author); ?>" size="22" tabindex="1" <?php if ($req) echo "aria-required='true'"; ?> />
+				
 			</div>
-
-			<div>
-				<input type="text" name="email" id="email" value="<?php echo esc_attr($comment_author_email); ?>" size="22" tabindex="2" <?php if ($req) echo "aria-required='true'"; ?> />
+			<div class="input-block">
 				<label for="email">Mail (will not be published) <?php if ($req) echo "(required)"; ?></label>
+				<input type="text" name="email" id="email" value="<?php echo esc_attr($comment_author_email); ?>" size="22" tabindex="2" <?php if ($req) echo "aria-required='true'"; ?> />
 			</div>
-
-			<div>
-				<input type="text" name="url" id="url" value="<?php echo esc_attr($comment_author_url); ?>" size="22" tabindex="3" />
-				<label for="url">Website</label>
-			</div>
-
 		<?php endif; ?>
 
 		<!--<p>You can use these tags: <code><?php echo allowed_tags(); ?></code></p>-->
-
-		<div>
+		<div class="input-block">
+			<label for="comment">Comment</label>
 			<textarea name="comment" id="comment" cols="58" rows="10" tabindex="4"></textarea>
 		</div>
-
-		<div>
+		<label>Write in the number THREE to prove you are not a robot</label>
+		<input type="text" name="captcha" value="" maxlength="1" class="captcha" />
+		<div class="input-block">
 			<input name="submit" type="submit" id="submit" tabindex="5" value="Submit Comment" />
 			<?php comment_id_fields(); ?>
 		</div>
