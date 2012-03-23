@@ -371,7 +371,7 @@ if($is_backend ){
 function menu_cache($args = array()){
 
   if(isset($args['menu_id'])){
-    $menu_file = __DIR__ . '/cache/'.$args['menu_id'].'.html.cache';
+    $menu_file = DIR_CACHE.$args['menu_id'].'.html.cache';
       if(!file_exists($menu_file)){
           $_args = array(
             'menu'          => '', 
@@ -428,8 +428,8 @@ function auto_compile_less($less_file, $css_file) {
   
   // Handles file relativity issues;
   $cache_file  = DIR_CACHE . $css_file .".cache";
-  $less_file = __DIR__ . '/' . $less_file;
-  $css_file  = __DIR__ . '/' . $css_file;
+  $less_file = DIR_TMPL. '/' . $less_file;
+  $css_file  = DIR_TMPL . '/' . $css_file;
   
  
   // Comment for testing/ uncomment for live
