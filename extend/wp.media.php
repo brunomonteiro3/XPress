@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * wp.media.php - Media related functions and filters are found in the 
+ * media extensions. You can also find the [gallery] shortcode in here.
+ * 
+ * @since 0.1
+ */
+
 // http://wordpress.stackexchange.com/questions/4307/how-can-i-add-an-image-upload-field-directly-to-a-custom-write-panel/4413#4413
 /*
 

@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * Cleanup extra WordPress 'ish I don't want
+ * 
+ *  
+ * @since 0.1
+ * @file  wp.cleanup.php
+ */
 
 // Kill the admin bar
 show_admin_bar(false);

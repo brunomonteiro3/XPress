@@ -1,34 +1,103 @@
-@color_pri : #ccc;
-@color_sec : #fff;
+/* ==========================================================================
+   BASE LESS 
+   The boilerplate .less template with parts from hbp and twitter bootstrap
+
+   @author  : Andres Hermosilla
+   @version : 0.1
+
+   ========================================================================== 
+   Defaults - set all your base args and vars here
+   ========================================================================== */
 
 
-// Links
-@linkColor: #08c;
-@linkColorHover: darken(@linkColor, 15%);
+// For typography
+@fontColor: #222;
+@fontBody: Arial, sans-serif;
+@fontBodySize : 14px;
+@fontHeadline: Tahoma, sans-serif;
+@baseLineHeight: 18px;
+
+// For Layouts
+@siteWidth : 1600px;
+@siteGutterWidth : 20px;
+@gridColumns : 10;
+
+// Colors
+@colorPri : #ccc;
+@colorSec : #fff;
+@colorGrey : #ccc;
+@colorGreyL : #ddd;
+@colorGreyD : #333;
+@colorWhite : #fff;
+@colorLink: #3e9ebe;
+@colorLinkHover: darken(@colorLink, 15%);
+@colorHeadline:#24bdce;
+
+// Default CSS3 values
+@defBorderRadius:5px;
+@defBoxShadow: 0 1px 3px rgba(0,0,0,.25);
+@defTransition: all 200ms linear;
+
+// Alert CSS vars
+@warningText: #c09853;
+@warningBackground: #fcf8e3;
+@warningBorder: darken(spin(@warningBackground, -10), 3%);
+
+@errorText: #b94a48;
+@errorBackground: #f2dede;
+@errorBorder: darken(spin(@errorBackground, -10), 3%);
+
+@successText: #468847;
+@successBackground: #dff0d8;
+@successBorder: darken(spin(@successBackground, -10), 5%);
+
+@infoText: #3a87ad;
+@infoBackground: #d9edf7;
+@infoBorder: darken(spin(@infoBackground, -10), 7%);
+
+
+
+.default{
+  .typography{
+    font-size: @fontBodySize; 
+    line-height: @baselineHeight;
+  }
+}
+
+/* ==========================================================================
+   Mixins - the reusable classes etc.
+   ========================================================================== */
+@import "less/mixins.less";
+
+/*
+  Mixins you should used
+  .border-radius();
+  .box-shadow();
+  .rotate();
+  .transition();
+  .scale();
+  .translate(@x: 0, @y: 0);
+  .skew(@x: 0, @y: 0);
+  .opacity(@opacity: 100);
+  .hide-text;
+  .text-overflow;
+  .center-block;
+
+*/
+
+
 
 article, aside, details, figcaption, figure, footer, header, hgroup, nav, section { display: block; }
 audio, canvas, video { display: inline-block; *display: inline; *zoom: 1; }
 audio:not([controls]) { display: none; }
 [hidden] { display: none; }
-
 html { font-size: 100%; overflow-y: scroll; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
-body { margin: 0; font-size: 13px; line-height: 1.231; }
-body, button, input, select, textarea { font-family: sans-serif; color: #555; }
-
-::-moz-selection { background: #fe57a1; color: #fff; text-shadow: none; }
-::selection { background: #fe57a1; color: #fff; text-shadow: none; }
-
-a { color: @linkColor; text-decoration:none;}
-a:visited { }
-a:hover { color:@linkColorHover;}
-a:focus { outline:none; }
-a:hover, a:active { outline: 0; }
-
+body { margin: 0; .default.typography }
 abbr[title] { border-bottom: 1px dotted; }
 b, strong { font-weight: bold; }
 blockquote { margin: 1em 40px; }
 dfn { font-style: italic; }
-hr { display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0; }
+hr { display: block; height: 1px; border: 0; border-top: solid 2px #DDE3E5; margin: 1em 0; padding: 0; }
 ins { background: #ff9; color: #000; text-decoration: none; }
 mark { background: #ff0; color: #000; font-style: italic; font-weight: bold; }
 pre, code, kbd, samp { font-family: monospace, monospace; _font-family: 'courier new', monospace; font-size: 1em; }
@@ -39,71 +108,505 @@ small { font-size: 85%; }
 sub, sup { font-size: 75%; line-height: 0; position: relative; vertical-align: baseline; }
 sup { top: -0.5em; }
 sub { bottom: -0.25em; }
-ul, ol { margin: 1em 0; padding: 0 0 0 40px; }
 dd { margin: 0 0 0 40px; }
-nav ul, nav ol { list-style: none; list-style-image: none; margin: 0; padding: 0; }
-img { border: 0; -ms-interpolation-mode: bicubic; vertical-align: middle; }
-svg:not(:root) { overflow: hidden; }
-figure { margin: 0; }
-
-form { margin: 0; }
-fieldset { border: 0; margin: 0; padding: 0; }
-label { cursor: pointer; }
-legend { border: 0; *margin-left: -7px; padding: 0; }
-button, input, select, textarea { font-size: 100%; margin: 0; vertical-align: baseline; *vertical-align: middle; }
-button, input { line-height: normal; *overflow: visible; }
-table button, table input { *overflow: auto; }
-button, input[type="button"], input[type="reset"], input[type="submit"] { cursor: pointer; -webkit-appearance: button; }
-input[type="checkbox"], input[type="radio"] { box-sizing: border-box; }
-input[type="search"] { -webkit-appearance: textfield; -moz-box-sizing: content-box; -webkit-box-sizing: content-box; box-sizing: content-box; }
-input[type="search"]::-webkit-search-decoration { -webkit-appearance: none; }
-button::-moz-focus-inner, input::-moz-focus-inner { border: 0; padding: 0; }
-textarea { overflow: auto; vertical-align: top; resize: vertical; }
-input:valid, textarea:valid {  }
-input:invalid, textarea:invalid { background-color: #f0dddd; }
-
-table { border-collapse: collapse; border-spacing: 0; }
-td { vertical-align: top; }
-
-// GRID
-// --------------------------------------------------
-
-// Default 940px grid
-@gridColumns: 12;
-@gridColumnWidth: 60px;
-@gridGutterWidth: 20px;
-@gridRowWidth: (@gridColumns * @gridColumnWidth) + (@gridGutterWidth * (@gridColumns - 1));
-
-// Fluid grid
-@fluidGridColumnWidth: 6.382978723%;
-@fluidGridGutterWidth: 2.127659574%;
+::-moz-selection,::selection { background: #B2736E; color: #fff; text-shadow: none; }
 
 
-@import "css/mixins.less";
-@import "css/forms.less";
-@import "css/tables.less";
-
-/* ==|== primary styles =====================================================
-   Author: 
+/* ==========================================================================
+   Typography - h1,h6,ul,dt,ol, etc.
    ========================================================================== */
-/* ==|== media queries ====================================================== */
+@import "less/type.less";
 
-/* Include only for responsive designs */
-@import "css/responsive.less";
 
-/* ==|== print styles ======================================================= */
+/* ==========================================================================
+   Layouts - more structural type things
+   ========================================================================== */
+
+.hentry{
+  margin-bottom:20px;
+}
+
+.excerpt{
+  min-height:10px;
+
+}
+
+.meta{
+  padding:2px 20px 4px 14px;
+  margin:-8px 0 0 0px;
+  font-size:11px;
+  border-bottom:solid 1px #eee;
+  border-left:solid 1px #eee;
+}
+
+
+.post-heading{
+  background: lighten(#587787, 50%);
+  padding:6px 20px;
+  margin:0 0 12px 0;
+  .border-radius(4px);
+
+  .meta{
+    float:right;
+    margin-top: 6px;
+  }
+
+  .datetime{
+    float:right;
+    margin-top:6px;
+  }
+}
+
+.page-width{
+  width:@siteWidth - @siteGutterWidth; 
+}
+.container{
+  .center-block;
+  #grid > .core((@siteWidth / @gridColumns)-@siteGutterWidth, @siteGutterWidth);
+}
+
+
+
+/* ==========================================================================
+   Header - main header at top of every page
+   ========================================================================== */
+#header{
+  position: relative;
+}
+
+/* ==========================================================================
+   Sidebar - primary sidebar
+   ========================================================================== */
+
+#sidebar{
+  min-height:470px;
+  width:300px;
+  float:right;
+  color:#989696;
+}
+
+
+/* ==========================================================================
+   Footer - main footer
+   ========================================================================== */
+
+#footer{
+  
+}
+
+
+
+/* ==========================================================================
+   Helpers - common to every site
+   ========================================================================== */
+
+// Turn any div into a split column
+.split-col{
+  display:block;
+  width:48%;
+  float:left;
+  
+  +.split-col{
+    float:right;
+  }
+}
+
+/* HTML
+
+<div class="alert">
+  <a href="#" class="close" data-dismiss="alert">×</button>
+  <strong>Warning!</strong> Best check yo self, you're not looking too good.
+</div>
+
+*/
+.alert {
+  padding: 8px 35px 8px 14px;
+  margin-bottom: @baseLineHeight;
+  text-shadow: 0 1px 0 rgba(255,255,255,.5);
+  background-color: @warningBackground;
+  border: 1px solid @warningBorder;
+  .border-radius();
+  color: @warningText;
+}
+.alert-heading {
+  color: inherit;
+}
+
+// Adjust close link position
+.alert .close {
+  position: relative;
+  top: -2px;
+  right: -21px;
+  line-height: 18px;
+}
+
+// Alternate styles
+
+.alert-success {
+  background-color: @successBackground;
+  border-color: @successBorder;
+  color: @successText;
+}
+.alert-danger,
+.alert-error {
+  background-color: @errorBackground;
+  border-color: @errorBorder;
+  color: @errorText;
+}
+.alert-info {
+  background-color: @infoBackground;
+  border-color: @infoBorder;
+  color: @infoText;
+}
+
+// Block alerts
+.alert-block {
+  padding-top: 14px;
+  padding-bottom: 14px;
+}
+.alert-block > p,
+.alert-block > ul {
+  margin-bottom: 0;
+}
+.alert-block p + p {
+  margin-top: 5px;
+}
+/* HTML
+
+<div class="pagination">
+  <ul>
+    <li><a href="#">Prev</a></li>
+    <li class="active"><a href="#">1</a></li>
+    <li><a href="#">2</a></li>
+    <li><a href="#">3</a></li>
+    <li><a href="#">4</a></li>
+    <li><a href="#">Next</a></li>
+  </ul>
+</div>
+
+*/
+
+// Pagination
+.pagination {
+  height: @baseLineHeight * 2;
+  margin: @baseLineHeight 0;
+  
+  ul {
+    display: inline-block;
+  
+    margin-left: 0;
+    margin-bottom: 0;
+    .border-radius(3px);
+    .box-shadow(0 1px 2px rgba(0,0,0,.05));
+  }
+
+  li {
+    display: inline;
+
+    &:first-child a {
+      border-left-width: 1px;
+      .border-radius(3px 0 0 3px);
+    }
+    &:last-child a {
+      .border-radius(0 3px 3px 0);
+    }
+  }
+  
+  a {
+    float: left;
+    padding: 0 14px;
+    line-height: (@baseLineHeight * 2) - 2;
+    text-decoration: none;
+    border: 1px solid #ddd;
+    border-left-width: 0;
+  }
  
-@media print {
-  * { background: transparent !important; color: black !important; text-shadow: none !important; filter:none !important; -ms-filter: none !important; } 
-  a, a:visited { text-decoration: underline; }
-  a[href]:after { content: " (" attr(href) ")"; }
-  abbr[title]:after { content: " (" attr(title) ")"; }
-  .ir a:after, a[href^="javascript:"]:after, a[href^="#"]:after { content: ""; } 
-  pre, blockquote { border: 1px solid #999; page-break-inside: avoid; }
-  thead { display: table-header-group; }
-  tr, img { page-break-inside: avoid; }
-  img { max-width: 100% !important; }
-  @page { margin: 0.5cm; }
-  p, h2, h3 { orphans: 3; widows: 3; }
-  h2, h3 { page-break-after: avoid; }
+  a:hover, .active a{
+     background-color: #f5f5f5;
+  }
+
+  .active a {
+    color: @colorGreyL;
+    cursor: default;
+  }
+
+  .disabled{
+    span,a,a:hover{
+      color: @colorGreyL;
+      background-color: transparent;
+      cursor: default;
+    }
+  }
+}
+// Centered
+.pagination-centered {
+  text-align: center;
+}
+.pagination-right {
+  text-align: right;
+}
+
+.post-edit-link{
+  display:block;
+  padding:12px 22px;
+  background:#ffec93;
+  color:#685c26;
+  position:relative;
+  clear:both;
+  letter-spacing:1px;
+  font-weight:bold;
+  .border-radius(4px);
+
+  small{
+    font-weight:normal;
+  }
+}
+// WordPress Widgets
+.widget{
+  ul{
+    padding:0;
+    margin:0;
+  }
+
+  li{
+    &:last-child{
+        
+    }
+  }
+}
+
+/*
+  NEED
+  Accordian
+  Side/Top Tabbing solution
+
+*/
+.toggles{
+  .toggle{
+
+  }
+  .toggle-content{
+    position: relative;
+    
+    ul{
+      position: relative;
+    }
+  }
+}
+
+/*
+
+<div class="accordion" id="accordion2">
+  <div class="accordion-group">
+    <div class="accordion-heading">
+      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
+                  Collapsible Group Item #1
+      </a>
+    </div>
+    <div id="collapseOne" class="accordion-body collapse in">
+      <div class="accordion-inner">
+                  Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+      </div>
+    </div>
+  </div>
+</div>
+*/
+
+/* ==========================================================================
+   Navigation
+   ========================================================================== */
+nav ul, nav ol { 
+  list-style: none; 
+  list-style-image: none; 
+  margin: 0; 
+  padding: 0; 
+}
+
+// Top Menu
+#menu-main{
+  background:#b56a64;
+  height:70px;
+
+  .sub-menu{
+    position:absolute;
+    background:#b56a64;
+    padding:0 0 12px 0;
+   
+    top:68px;
+    height100%;
+    width:200px;
+    z-index:130;
+  }
+
+  li{
+    font-size:20px;
+    
+    float:left;
+    position: relative;
+    text-shadow:-1px -1px 1px #764642;
+    .transition(all 300ms linear);
+
+    a{
+      display:block;
+      padding:22px 12px;
+    }
+
+    &:hover{
+      a{
+        color:#d7bab8;
+      }
+
+      li {
+          a{
+            color:#e7d3d1;
+
+            &:hover{
+               color:#c08e89;
+            }
+          }
+      }
+    
+    }
+
+    li{
+      
+      float:none;
+
+      a{
+        padding:4px 0 4px 18px;
+      }
+    }
+  }
+  a{
+    color:#fff;
+    cursor: pointer;
+    .transition(all 300ms linear);
+  }
+}
+
+// FOOTER MENU
+#menu-footer{
+  float:left;
+  width:430px;
+  padding:0;
+  margin:0;
+
+  a{
+    color:#7a8c90;
+    .transition(all 200ms linear);
+
+    &:hover{
+      color:  darken(#7a8c90, 20%);
+    }
+  }
+
+  .sub-menu{
+    padding:0;
+    margin:0;
+  }
+
+  li{
+    float:left;
+    font-weight:bold;
+    text-transform:uppercase;
+    font-size:14px;
+    list-style:none;
+    margin-right:38px;
+
+      
+
+    li{
+      float:none;
+      font-weight:normal;
+      line-height:18px;
+      font-size:13px;
+      text-transform:capitalize;
+    }
+  }
+}
+
+/* ==========================================================================
+   Other
+   ========================================================================== */
+
+/* HTML
+
+<div class="google-map" data-lng="-119.899121" data-lat="36.944825"></div>
+
+*/
+#google-map,.google-map{
+  width:320px;
+  height:290px;
+  display:block;
+}
+
+
+/* ==========================================================================
+   Images & Gallery
+   ========================================================================== */
+@import "less/img.less";
+
+/* ==========================================================================
+   Tables
+   ========================================================================== */
+@import "less/tables.less";
+
+
+/* ==========================================================================
+   WP - Comments
+   ========================================================================== */
+@import "less/wp-comments.less";
+
+/*
+article
+  header.post-heading
+    h2.entry-title
+  section
+  footer
+
+
+  <time class="updated" datetime="'. get_the_time('c') .'" pubdate>'. sprintf(__('Posted on %s at %s.', 'roots'), get_the_date(), get_the_time()) .'</time>
+  <p class="byline author vcard">'. __('Written by', 'roots') .' <a href="'. get_author_posts_url(get_the_author_meta('id')) .'" rel="author" class="fn">'. get_the_author() .'</a></p>
+
+
+<form role="search" method="get" id="searchform" class="form-search" action="">
+<label class="visuallyhidden" for="s"><?php _e('Search for:', 'roots'); ?></label>
+<input type="text" value="" name="s" id="s" class="search-query" placeholder="Search">
+<input type="submit" id="searchsubmit" value="<?php _e('Search', 'roots'); ?>" class="btn">
+</form>
+
+ 
+*/
+
+/* ==========================================================================
+   Forms
+   ========================================================================== */
+@import "less/form.less";
+
+/* ==========================================================================
+   Media Queries
+   ========================================================================== */
+@import "less/mq.less";
+
+/* ==========================================================================
+   Print
+   ========================================================================== */
+@import "less/print.less";
+
+/* ==========================================================================
+   No-JS styling
+   ========================================================================== */
+.no-js{
+  #menu-main{
+    .sub-menu{
+      display: none;
+    }
+    li{
+      &:hover{
+        .sub-menu{
+          display:block;
+        }
+      }
+    }
+  }
 }

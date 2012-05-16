@@ -1,5 +1,13 @@
 <?php
 
+/**
+ * Define any (more generic) shortcodes here. The [gallery] shortcode 
+ * is under media since it fits that category better.
+ *  
+ * @since 0.1
+ * @file  wp.shortcodes.php
+ */
+
 function site_shortcode($atts) {
    extract(shortcode_atts(array(
        'info' => '',

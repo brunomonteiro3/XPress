@@ -17,7 +17,7 @@ function editor_content( $content ) {
 // Add admin logo to header
 function logo_admin() {
   echo '<style type="text/css">';
-  echo '#header-logo { background-image: url('.TMPL_URL.'/css/img/admin-logo.png) !important; }';
+  echo '#header-logo { background-image: url('.TMPL_URL.'/img/admin-logo.png) !important; }';
   echo '</style>';
 }
 
@@ -26,7 +26,7 @@ add_action('admin_head', 'logo_admin');
 // Add logo to login page
 function logo_login() {
     echo '<style type="text/css">';
-    echo 'h1 a { background-image:url('.TMPL_URL.'/css/img/login-logo.png) !important; }';
+    echo 'h1 a { background-image:url('.TMPL_URL.'/img/login-logo.png) !important; }';
     echo '</style>';
 }
 add_action('login_head', 'logo_login');

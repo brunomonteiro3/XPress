@@ -1,0 +1,58 @@
+// For desktops
+.visible-phone { display: none !important; }
+.visible-tablet { display: none !important; }
+.visible-desktop { } // Don't set initially
+.hidden-phone { }
+.hidden-tablet { }
+.hidden-desktop { display: none !important; }
+
+// Phones only
+@media (max-width: 767px) {
+  // Show
+  .visible-phone { display: inherit !important; } // Use inherit to restore previous behavior
+  // Hide
+  .hidden-phone { display: none !important; }
+  // Hide everything else
+  .hidden-desktop { display: inherit !important; }
+  .visible-desktop { display: none !important; }
+}
+
+// Tablets & small desktops only
+@media (min-width: 768px) and (max-width: 979px) {
+  // Show
+  .visible-tablet { display: inherit !important; }
+  // Hide
+  .hidden-tablet { display: none !important; }
+  // Hide everything else
+  .hidden-desktop { display: inherit !important; }
+  .visible-desktop { display: none !important ; }
+}
+
+@media (max-width: 480px) {
+
+}
+
+// LANDSCAPE PHONE TO SMALL DESKTOP & PORTRAIT TABLET
+@media (max-width: 768px) {
+  
+}
+
+// PORTRAIT TABLET TO DEFAULT DESKTOP
+@media (min-width: 768px) and (max-width: 980px) {
+
+}
+
+// TABLETS AND BELOW
+@media (max-width: 980px) {
+
+}
+
+// DEFAULT DESKTOP
+@media (min-width: 980px) {
+  
+}
+
+// LARGE DESKTOP & UP
+@media (min-width: 1200px) {
+
+}

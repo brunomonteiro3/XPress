@@ -13,8 +13,6 @@ $style = array(
 	'css'	=> 'site.css'
 );
 
-
-
 // Handles LESS compiling
 function auto_compile_less($less_file, $css_file) {
   
@@ -30,16 +28,20 @@ function auto_compile_less($less_file, $css_file) {
   } else {
     $cache = $less_file;
   }
-
-
+  
   $new_cache = lessc::cexecute($cache);
 
-  if (!is_array($cache) || $new_cache['updated'] > $cache['updated']) {
+  if (!is_array($cache) || $new_cache['updated'] > $cache['updated']){
+    
+    // Compress CSS
+    require_once(DIR_EXTND.'/libs/CSS_Compress.php');
+    $compress = new CSS_Compress($css_file);
+    $compiled = $compress::replace($new_cache['compiled']);
+
     file_put_contents($cache_file, serialize($new_cache));
-    file_put_contents($css_file, $new_cache['compiled']);
+    file_put_contents($css_file, $compiled);
   }
 }
-
 auto_compile_less($style['less'], $style['css']);
 
 

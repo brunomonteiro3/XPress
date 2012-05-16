@@ -1,0 +1,117 @@
+h1, h2, h3, h4, h5, h6 {
+  color:@colorHeadline;
+  font-weight:normal;
+  font-family: @fontHeadline;
+  text-rendering: optimizelegibility; // Fix the character spacing for headings
+
+
+   a{
+      font-weight:normal;
+    }
+  
+  small {
+    font-weight: normal;
+    color: @colorGreyL;
+  }
+}
+
+h1 {
+  font-size: 30px;
+  line-height: @baseLineHeight * 2;
+  
+}
+h2 {
+  font-size: 24px;
+  line-height: @baseLineHeight * 2;
+  small {
+    font-size: 18px;
+  }
+}
+h3 {
+  font-size: 18px;
+  line-height: @baseLineHeight * 1.5;
+  small {
+    font-size: 14px;
+  }
+}
+h4, h5, h6 {
+  line-height: @baseLineHeight;
+}
+h4 {
+  font-size: 14px;
+  small {
+    font-size: 12px;
+  }
+}
+h5 {
+  font-size: 12px;
+}
+h6 {
+  font-size: 11px;
+  color: @grayLight;
+  text-transform: uppercase;
+}
+a { 
+  color: @linkColor; 
+  text-decoration:none;
+
+  &:visited { color:@linkColorHover;}
+  &:hover { color:@linkColorHover;}
+  &:focus { outline:none; }
+  &:hover, &:active { outline: 0; }
+
+}
+
+p {
+  margin: 0 0 @baseLineHeight / 2;
+  font-family: @baseFontFamily;
+  font-size: @baseFontSize;
+  line-height: @baseLineHeight;
+}
+
+/* ==========================================================================
+   Lists
+   ========================================================================== */
+ul, ol {
+  margin: 1em 0;
+  padding: 0 0 0 40px;
+
+  &.unstyled {
+    margin-left: 0;
+    list-style: none;
+  }
+}
+
+ul{
+  &.list{
+
+  }
+}
+
+dl {
+  margin-bottom: @baseLineHeight;
+}
+dt,
+dd {
+  line-height: @baseLineHeight;
+}
+dt {
+  font-weight: bold;
+  line-height: @baseLineHeight - 1; // fix jank Helvetica Neue font bug
+}
+dd {
+  margin-left: @baseLineHeight / 2;
+}
+// Horizontal layout (like forms)
+.dl-horizontal {
+  dt {
+    float: left;
+    width: 120px;
+    clear: left;
+    text-align: right;
+    .text-overflow();
+  }
+  dd {
+    margin-left: 130px;
+  }
+}

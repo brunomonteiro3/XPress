@@ -1,5 +1,13 @@
 <?php
 
+/**
+ * Comments related functions - comments template, extra comment 
+ * form fields, etc.
+ *  
+ * @since 0.1
+ * @file  wp.comments.php
+ */
+
 //http://wpengineer.com/2214/adding-input-fields-to-the-comment-form/
 add_filter( 'preprocess_comment', 'verify_comment_captcha' );
 function verify_comment_captcha( $commentdata ) {

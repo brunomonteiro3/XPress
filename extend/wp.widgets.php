@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * Widget related functions - widget areas, admin widgets, etc.
+ *  
+ * @since 0.1
+ * @file  wp.widgets.php
+ */
+
 // Enable shortcodes in widget area
 add_filter('widget_text', 'do_shortcode');
 

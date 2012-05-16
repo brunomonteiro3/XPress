@@ -1,5 +1,13 @@
 <?php
 
+/**
+ * Email related functions - i.e. enable HTML emails, setting custom 
+ * password remind email etc.
+ *  
+ * @since 0.1
+ * @file  wp.email.php
+ */
+
 // So you can send HTML emails, mate!  
 function mail_content_type(){
     return "text/html";

@@ -1,4 +1,10 @@
 <?php
+/**
+ * Cron is something I feel is better suited for a plugin, but I still include some functions
+ *  
+ * @since 0.1
+ * @file  wp.cron.php
+ */
 
 // http://themocracy.com/2010/02/wp-cron-automating-scheduling/
 add_filter('cron_schedules', 'add_weekly_cron');
