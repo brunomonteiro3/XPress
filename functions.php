@@ -1,14 +1,14 @@
 <?php
 /**
- * The floor framework was developed as more of a starting boilerplate for more customized 
+ * The Xpress framework was developed as more of a starting boilerplate for more customized 
  * WordPress sites. Extending the base functionality was the line of thought behind development. 
  * Many experts suggest using different plugins but I don't like the plugin mess that often 
  * results. I like to build out the functionality that clients need. 
  * 
  * Comments and uncomment the functionality you want. This framework wasn't intended for the 
- * average user with options in the dashboard.
+ * average user with options in the dashboard - it was built for custom projects.
  * 
- * @package WordPress 3.3
+ * @package WordPress 3.4
  * @author Andres Hermosilla
  * @since 0.1
  */
@@ -40,6 +40,7 @@ function x_load_wp_ext($ext){
  */
 
 define('IS_LIVE', false);
+define('WP_URL', get_bloginfo('wpurl'));
 define('SITE_URL', get_bloginfo('url'));
 define('TMPL_URL', get_bloginfo('template_url'));
 define('DIR_TMPL', get_template_directory());
@@ -47,7 +48,7 @@ define('DIR_CACHE',DIR_TMPL.'/cache/');
 define('DIR_EXTND',DIR_TMPL .'/extend/');
 define('DIR_ADMIN',ABSPATH. 'wp-admin/');
 define('URI',$_SERVER['REQUEST_URI']);
-define('THUMBSIZE',12); // width x height
+
 
 add_action( 'after_setup_theme', 'xa_setup' );
 

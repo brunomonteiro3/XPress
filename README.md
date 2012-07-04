@@ -1,7 +1,7 @@
-Custom WP Theme Base
---------------------
+Xpress
+------
 
-Starter theme for WordPress projects, with much of my functions.php tools ready to make development quicker. Base theme targets more dynamic, custom WordPress sites, less of a blog focus and more on custom web development.
+Xpress is a starter theme for WordPress projects, with many tools ready to make development quicker. Base theme targets more dynamic, custom WordPress sites, less of a blog focus and more on custom WordPress development.
 
 
 Features
@@ -32,19 +32,38 @@ DIR_EXTND // (string) Path of extensions (classes, includes, etc.)
 DIR_ADMIN // // (string) Path of WordPress wp-admin folder
 URI // (string) Current request
 IS_MOBILE // (boolean) Is browser mobile?
+IS_LIVE // (boolean) Is site live?
+
+
 
 ?>
 ```
+
+Functions
+---------
+
+All non Wordpress functions have been prefixed with x(?)_ to help make it identify custom functions. The exact prefix depends on the type of function. 
+
+- x_ any function
+- xf_ custom filter
+- xa_ add custom action
+- xs_ add shortcode
+
+eg ```php <?php add_action( 'admin_menu', 'xa_update_menu' ); ?> ```
+
+
 Template Functions
 ------------------
+
+
 ```php
 <?php 
 
 // Handles document <title>
-the_doc_title(); 
+x_doc_title(); 
 
 // Works the same and handles the same parameters as wp_nav_menu(), but also caches menu
-menu_cache( $args = array()); 
+x_menu_cache( $args = array()); 
 
 /*
 
@@ -59,7 +78,7 @@ if ($_FILES['thumbnail']){
 }
 
 */
-insert_attachment($fh, $post_id, $title, $to_thumb = false);
+x_insert_attachment($fh, $post_id, $title, $to_thumb = false);
 
 ?>
 ```
