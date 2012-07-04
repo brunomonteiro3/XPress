@@ -14,7 +14,7 @@ define('WP_DEBUG_LOG',     true);  // Turn logging to wp-content/debug.log ON
 // var_dump(debug_backtrace());
 
 // List all hooked function or find a specific function
-function list_hooked_functions($tag=false){
+function x_list_hooked_functions($tag=false){
  global $wp_filter;
  if ($tag) {
   $hook[$tag]=$wp_filter[$tag];
@@ -41,7 +41,7 @@ function list_hooked_functions($tag=false){
 
 // this can live in /themes/mytheme/functions.php, or maybe as a dev plugin?
 // Ideally placed in header.php
-function get_template_name() {
+function x_get_template_name() {
   foreach ( debug_backtrace() as $called_file ) {
     foreach ( $called_file as $index ) {
       if ( !is_array($index[0]) && strstr($index[0],'/themes/') && !strstr($index[0],'footer.php') ) {
@@ -52,7 +52,9 @@ function get_template_name() {
   $template_contents = file_get_contents($template_file) ;
   preg_match_all("(Template Name:(.*)\n)siU",$template_contents,$template_name);
   $template_name = trim($template_name[1][0]);
-  if ( !$template_name ) { $template_name = '(default)' ; }
+  if (!$template_name) { 
+    $template_name = '(default)'; 
+  }
   $template_file = array_pop(explode('/themes/', basename($template_file)));
   return $template_file . ' > '. $template_name ;
 }

@@ -3,7 +3,7 @@
 
 // Use if you need to modify menu output
 //http://www.kriesi.at/archives/improve-your-wordpress-navigation-menu-output
-class menu_extended extends Walker_Nav_Menu
+class x_menu_extended extends Walker_Nav_Menu
 {
       function start_el(&$output, $item, $depth, $args)
       {
@@ -48,18 +48,19 @@ class menu_extended extends Walker_Nav_Menu
 
 
 // function for caching menus
-function menu_cache($args = array()){
-
+function x_menu_cache($args = array()){
+  global $post;
   if(isset($args['menu_id'])){
-    $menu_file = DIR_CACHE.$args['menu_id'].'.html.cache';
+    $menu_file = DIR_CACHE.$args['menu_id'].''.$post->ID.'.html.cache';
       if(!file_exists($menu_file)){
           $_args = array(
+            'show_home'     => true,
             'menu'          => '', 
             'container'     => '',
             'container_id'  => '',
             'fallback_cb'   => 'wp_page_menu',
             'echo'          => false,
-            'walker' => new menu_extended()
+            'walker' => new x_menu_extended()
           );
           
           foreach($args as $arg => $value) {
@@ -79,18 +80,19 @@ function menu_cache($args = array()){
        wp_nav_menu($args);
     }
 }
+global $pagenow;
 // Flushes menu cache if menus are changed
 if(isset($_POST['action']) && $pagenow === 'nav-menus.php'){
   array_map('unlink', glob(DIR_CACHE.'*.html.cache'));
 }
 
 
-function flush_cache(){
+function x_flush_cache(){
    array_map('unlink', glob(DIR_CACHE.'*'));
 }
 
 
-function page_group_menu(){
+function x_page_group_menu(){
   global $post;
   $cache_file = DIR_CACHE .'pm.'.$post->ID.'.html.cache';
   if(!file_exists($cache_file)){
@@ -109,11 +111,11 @@ function page_group_menu(){
   include_once($cache_file);
 }
 
-add_action('save_post','flush_cache');
+add_action('save_post','x_flush_cache');
 
 
 // http://www.kriesi.at/archives/how-to-build-a-wordpress-post-pagination-without-plugin
-function post_pagination($pages = '', $range = 3){  
+function x_post_pagination($pages = '', $range = 3){  
      $showitems = ($range * 2)+1;  
 
      global $paged;

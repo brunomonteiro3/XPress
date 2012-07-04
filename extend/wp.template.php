@@ -15,9 +15,9 @@
  */
 
 // Handles outputting document title
-function the_doc_title(){
+function x_doc_title(){
   global $paged;
-  print_r($s);
+ 
  echo '[';
  if (function_exists('is_tag') && is_tag()) {
       single_tag_title("Tag Archive for &quot;"); echo '&quot; - '; 
@@ -46,7 +46,7 @@ function the_doc_title(){
 
 
 
- function search_hilighter($content, $terms) {
+ function x_search_hilighter($content, $terms) {
     $do_not_highlight = array( "a", "A", "is", "Is", "the", "The", "and", "And" );
     $search_term = $terms;
     foreach ($search_term as $search_t) {
@@ -64,7 +64,7 @@ function the_doc_title(){
     echo $highlighted_content;
 }
 
-function post_errors($errors = array()){
+function x_post_errors($errors = array()){
   if(count($errors) > 0){
     foreach($errors as $error){
       echo '<div class="notification error">'."$error</div>";
@@ -81,24 +81,24 @@ function post_errors($errors = array()){
 
 // http://wpsnipp.com/index.php/css/alternate-odd-even-post-class/
 // Adding odd even classes to posts
-function oddeven_post_class($classes) {
+function xf_oddeven_post_class($classes) {
    static $current_class = 'odd-post';
    $classes[] = $current_class;
    $current_class = ($current_class == 'odd-post') ? 'even-post' : 'odd-post';
    return $classes;
 }
-add_filter ('post_class' ,'oddeven_post_class');
+add_filter ('post_class' ,'xf_oddeven_post_class');
 
 
 // New custom excerpt length
-function update_excerpt_length($length) {
+function xf_update_excerpt_length($length) {
   return 20;
 }
-add_filter('excerpt_length', 'update_excerpt_length');
+add_filter('excerpt_length', 'xf_update_excerpt_length');
 
 /*
 // Use if you have private or protected content
-function the_title_trim($title) {
+function xf_title_trim($title) {
   $title = attribute_escape($title);
   $findthese = array(
     '#Protected:#',
@@ -111,5 +111,5 @@ function the_title_trim($title) {
   $title = preg_replace($findthese, $replacewith, $title);
   return $title;
 }
-add_filter('the_title', 'the_title_trim');
+add_filter('the_title', 'xf_title_trim');
 */

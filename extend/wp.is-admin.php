@@ -1,8 +1,8 @@
 <?php
 
 
-wp_register_script('admin_extend', DIR_TMPL."/js/admin.js");
-wp_enqueue_script('admin_extend');
+//wp_register_script('admin_extend', DIR_TMPL."/js/admin.js");
+//wp_enqueue_script('admin_extend');
 
     /*
     // To add adminstration pages/tabs to backend

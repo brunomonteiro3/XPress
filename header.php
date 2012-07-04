@@ -9,7 +9,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title><?php the_doc_title(); ?></title>
+  <title><?php x_doc_title(); ?></title>
 
   <link rel="stylesheet" href="<?php echo TMPL_URL; ?>/site.css">
   <link rel="stylesheet" href="<?php echo TMPL_URL; ?>/css/prettyPhoto.css">
@@ -36,7 +36,7 @@
             'fallback_cb'   => 'wp_page_menu'
         );
         // For more dynamics sites, that don't use a caching plugin
-        menu_cache($args); 
+        x_menu_cache($args); 
         // If the site will be using a caching plugin
         // wp_nav_menu( $args );
      ?>

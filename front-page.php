@@ -14,7 +14,7 @@
 <?php endwhile; endif; ?>
 <?php edit_post_link('EDIT', '', ''); ?>
 
-
+<?php posts_nav_link(); ?>
 </section>
 <!-- // front-page.php -->
 <?php get_footer(); ?>

@@ -9,9 +9,9 @@
  */
 
 //http://wpengineer.com/2214/adding-input-fields-to-the-comment-form/
-add_filter( 'preprocess_comment', 'verify_comment_captcha' );
-function verify_comment_captcha( $commentdata ) {
-    if ( !isset( $_POST['captcha'])){
+add_filter( 'preprocess_comment', 'x_verify_comment_captcha' );
+function x_verify_comment_captcha( $commentdata ) {
+    if (!isset( $_POST['captcha'])){
        wp_die( __( 'Whoa! Did you use the number 3 for the CAPTCHA?' ));
     } else {
       if($_POST['captcha'] !== '3'){
@@ -26,9 +26,9 @@ function theme_comment($comment, $args, $depth) {
    <li <?php comment_class(); ?> id="li-comment-<?php comment_ID() ?>">
      <div id="comment-<?php comment_ID(); ?>">
       <div class="comment-meta">
-        <span class="author-meta">
+        <span class="author-meta" itemscope itemtype="http://schema.org/Person">
          <?php echo get_avatar($comment, $size = 32 ); ?>
-         <?php printf(__('<cite class="fn">%s</cite>'), get_comment_author_link()) ?>
+         <?php printf(__('<cite class="fn" itemprop="name">%s</cite>'), get_comment_author_link()) ?>
        </span>
        <span class="datetime">
         <?php printf(__('%1$s'), get_comment_date('F jS, Y')) ?><?php edit_comment_link(__('(Edit)'),'  ','') ?></span>

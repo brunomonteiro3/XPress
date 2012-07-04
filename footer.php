@@ -7,7 +7,7 @@
           'container_id'  => 'menu-footer'
         );
 
-        menu_cache($args); 
+        x_menu_cache($args); 
         // If the site will be using a caching plugin
         // wp_nav_menu( $args );
      

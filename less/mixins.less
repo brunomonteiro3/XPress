@@ -2,23 +2,23 @@
 
   .core (@gridColumnWidth, @gridGutterWidth) {
     
-    .spanX (@index) when (@index > 0) {
-      (~".span@{index}") { .span(@index); }
-      .spanX(@index - 1);
+    .columnX (@index) when (@index > 0) {
+      (~".columnw-@{index}") { .column(@index); }
+      .columnX(@index - 1);
     }
-    .spanX (0) {}
+    .columnX (0) {}
     
     .offsetX (@index) when (@index > 0) {
-      (~".offset@{index}") { .offset(@index); }
+      (~".offsetw-@{index}") { .offset(@index); }
       .offsetX(@index - 1);
     }
-    .offsetX (0) {}
+    .offsetX(0) {}
 
-    .offset (@columns) {
+    .offset(@columns) {
       margin-left: (@gridColumnWidth * @columns) + (@gridGutterWidth * (@columns + 1));
     }
 
-    .span (@columns) {
+    .column(@columns) {
       width: (@gridColumnWidth * @columns) + (@gridGutterWidth * (@columns - 1));
     }
 
@@ -27,13 +27,13 @@
       .clearfix();
     }
 
-    [class*="span"] {
+    [class*="column"] {
       float: left;
       margin-left: @gridGutterWidth;
     }
 
     // generate .spanX and .offsetX
-    .spanX (@gridColumns);
+    .columnX (@gridColumns);
     .offsetX (@gridColumns);
 
   }

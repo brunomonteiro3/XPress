@@ -16,6 +16,7 @@
  <?php else : ?>
 <h2>Not Found</h2>
 <?php endif; ?>
+<?php posts_nav_link(); ?>
 </section>
 <!-- // index.php -->
 <?php get_footer(); ?>

@@ -9,21 +9,21 @@
  */
 
 // So you can send HTML emails, mate!  
-function mail_content_type(){
+function xf_mail_content_type(){
     return "text/html";
 }
-add_filter( 'wp_mail_content_type','mail_content_type' );
+add_filter( 'wp_mail_content_type','xf_mail_content_type' );
 
 // http://wordpress.org/extend/plugins/welcome-email-editor/
-add_filter('retrieve_password_title', 'lost_pass_title', 10, 1 );
-add_filter('retrieve_password_message', 'lost_pass_message', 10, 2 );
+add_filter('retrieve_password_title', 'xf_lost_pass_title', 10, 1 );
+add_filter('retrieve_password_message', 'xf_pass_message', 10, 2 );
 
 
-function lost_pass_title(){
+function xf_lost_pass_title(){
   return 'Title';
 }
 
-function lost_pass_message(){
+function xf_lost_pass_message(){
   return 'Message';
 }
 
@@ -31,7 +31,7 @@ function lost_pass_message(){
 //http://sltaylor.co.uk/blog/customizing-new-user-email-pluggable-function/
 // Redefine user notification function  
 if ( !function_exists('wp_new_user_notification') ) {  
-    function wp_new_user_notification( $user_id, $plaintext_pass = '' ) {  
+    function wp_new_user_notification($user_id, $plaintext_pass = '' ) {  
         $user = new WP_User($user_id);  
   
         $user_login = stripslashes($user->user_login);  
@@ -43,7 +43,7 @@ if ( !function_exists('wp_new_user_notification') ) {
   
         @wp_mail(get_option('admin_email'), sprintf(__('[%s] New User Registration'), get_option('blogname')), $message);  
   
-        if ( emptyempty($plaintext_pass) )  
+        if (emptyempty($plaintext_pass))  
             return;  
   
         $message  = __('Hi there,') . "\r\n\r\n";  

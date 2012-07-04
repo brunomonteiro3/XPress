@@ -1,0 +1,18 @@
+<!-- [cached]  July 4, 2012, 5:50 pm -->
+<nav id="menu-footer" class="menu-menu-footer-container"><ul id="menu-footer" class="menu"><li id="menu-item-356" class="menu-item menu-item-type-post_type menu-item-object-page"><a href="http://localhost:8888/wp-crm/?page_id=345"><strong>Home</strong></a></li>
+<li id="menu-item-351" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-ancestor current_page_ancestor"><a href="http://localhost:8888/wp-crm/?page_id=350"><strong>Past Germs</strong></a>
+<ul class="sub-menu">
+	<li id="menu-item-352" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-ancestor current_page_ancestor"><a href="http://localhost:8888/wp-crm/?page_id=349">Rules</a>
+	<ul class="sub-menu">
+		<li id="menu-item-353" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-ancestor current-menu-parent current_page_parent current_page_ancestor"><a href="http://localhost:8888/wp-crm/?page_id=346">About</a>
+		<ul class="sub-menu">
+			<li id="menu-item-354" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-348 current_page_item"><a href="http://localhost:8888/wp-crm/?page_id=348">News</a></li>
+		</ul>
+</li>
+	</ul>
+</li>
+</ul>
+</li>
+<li id="menu-item-355" class="menu-item menu-item-type-post_type menu-item-object-page"><a href="http://localhost:8888/wp-crm/?page_id=347"><strong>Contact Us</strong></a></li>
+</ul></nav>
+<!-- // [cached] -->

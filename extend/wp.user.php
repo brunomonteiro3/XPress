@@ -2,8 +2,8 @@
 
 
 // Redirect admins to the dashboard and other users elsewhere after login
-// add_filter( 'login_redirect', 'login_redirect', 10, 3 );
-function login_redirect( $redirect_to, $request, $user ) {
+// add_filter( 'login_redirect', 'xf_login_redirect', 10, 3 );
+function xf_login_redirect( $redirect_to, $request, $user ) {
 
   // Set redirects for roles
   $redirects = array(
@@ -29,9 +29,9 @@ function login_redirect( $redirect_to, $request, $user ) {
 
 
 // Adjusting profile fields
-add_filter('user_contactmethods','profile_fields',10,1);
+add_filter('user_contactmethods','xf_profile_fields',10,1);
  
-function profile_fields( $contactmethods ) {
+function xf_profile_fields( $contactmethods ) {
   unset($contactmethods['aim']);
   unset($contactmethods['jabber']);
   unset($contactmethods['yim']);

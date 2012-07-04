@@ -18,16 +18,27 @@
  *  Function to load wp.extname.php extensions
  *  e.g. load_wp_ext('email'); loads wp.email.php from the extend folder
  */
-function load_wp_ext($ext){
+function x_load_wp_ext($ext){
   $ext = DIR_EXTND.'/wp.'.$ext.'.php';
   if(file_exists($ext)){
     require_once($ext);
   }
 }
+/**
+ * function prefix
+ * x_ any function
+ * xf_ custom filter
+ * xa_ add custom action
+ * xs_ add shortcode
+ * 
+ * 
+ * 
+ */
 
 /**
  *  Constants for commonly accessed values
  */
+
 define('IS_LIVE', false);
 define('SITE_URL', get_bloginfo('url'));
 define('TMPL_URL', get_bloginfo('template_url'));
@@ -36,19 +47,40 @@ define('DIR_CACHE',DIR_TMPL.'/cache/');
 define('DIR_EXTND',DIR_TMPL .'/extend/');
 define('DIR_ADMIN',ABSPATH. 'wp-admin/');
 define('URI',$_SERVER['REQUEST_URI']);
+define('THUMBSIZE',12); // width x height
 
+add_action( 'after_setup_theme', 'xa_setup' );
+
+// Use for general/common WordPress core theme functions
+function xa_setup(){
+  
+
+  register_nav_menus(
+    array('menu-main'   => __( 'Menu - Main' )),
+    array('menu-footer' => __( 'Menu - Footer' ))
+  );
+  
+  
+
+  add_image_size( 'thumb-portfolio', 440, 300, true ); 
+
+  add_theme_support( 'post-formats', array('aside','gallery','link'));
+  add_theme_support( 'post-thumbnails');
+  add_theme_support( 'custom-background');
+  add_theme_support( 'custom-header');
+}
 
 /**
  *  Functions that can't really be classified
  */
-load_wp_ext('other');
+x_load_wp_ext('other');
 
 /**
  * Remove menu items, dashboard widgets, RSS crap, etc.
  * 
  * @since 0.1
  */
-load_wp_ext('cleanup');
+x_load_wp_ext('cleanup');
 
 
 /**
@@ -72,18 +104,13 @@ $is_backend = is_admin();
 // (boolean) Check if is admin user
 $is_admin = current_user_can('manage_options');
 
-
-
 /**
  * The usual WordPress functions.php functions for theme support etc.
  * 
  * @since 0.1
  */
-// Menu & Thumbnail support
-add_theme_support( 'nav-menus' );
-add_theme_support( 'post-thumbnails' );
 
-load_wp_ext('template');
+x_load_wp_ext('template');
 
 /**
  * wp.nav.php - Menu's, sidebar menus, pagination, breadcrumbs are included in 
@@ -91,16 +118,7 @@ load_wp_ext('template');
  * 
  * @since 0.1
  */
-load_wp_ext('nav');
-
-// Menu setup
-add_action( 'init', 'custom_menus');
-function custom_menus() {
-  register_nav_menus(
-    array('menu-main'   => __( 'Menu - Main' )),
-    array('menu-footer' => __( 'Menu - Footer' ))
-  );
-}
+x_load_wp_ext('nav');
 
 
 /**
@@ -110,12 +128,9 @@ function custom_menus() {
  * @since 0.1
  */
 
-load_wp_ext('media');
+x_load_wp_ext('media');
 
-// Add custom thumbnail sizes
-if (function_exists( 'add_image_size' ) ) { 
-  add_image_size( 'pet_thumb', 440, 300, true ); 
-}
+
 
 /**
  * Functions that we only need to worry about if user is logged. 
@@ -127,7 +142,7 @@ if (function_exists( 'add_image_size' ) ) {
  * @file  wp.is-logged-in.php
  */
 if($is_logged_in !== 0){
-  load_wp_ext('is-logged-in');
+  x_load_wp_ext('is-logged-in');
 } else {
 
 }
@@ -139,21 +154,25 @@ if($is_logged_in !== 0){
  */
 
 if($is_backend){
-  load_wp_ext('backend');
+  x_load_wp_ext('backend');
   
   // For admin backend only
   if($is_admin){
-    load_wp_ext('is-admin');
+    x_load_wp_ext('is-admin');
   }
 
   // If the theme was just activated
   if (isset($_GET['activated'] ) && $pagenow == "themes.php" ){
-    load_wp_ext('install');
+    // hold activation message or redirect
+    x_load_wp_ext('activate');
+    // Check if theme has been setup and if anything needs to be 
+    // run on first load
+    x_load_wp_ext('install');
   }
 
 } else {
   // Is front end
-  wp_deregister_script('jquery');
+  // wp_deregister_script('jquery');
 }
 
 /**
@@ -162,7 +181,7 @@ if($is_backend){
  * @since 0.1
  * @file  wp.widgets.php
  */
-load_wp_ext('widgets');
+x_load_wp_ext('widgets');
 
 /**
  * Email related functions - i.e. enable HTML emails, setting custom 
@@ -171,7 +190,7 @@ load_wp_ext('widgets');
  * @since 0.1
  * @file  wp.email.php
  */
-load_wp_ext('email');
+x_load_wp_ext('email');
 
 /**
  * Comments related functions - comments template, extra comment 
@@ -180,7 +199,7 @@ load_wp_ext('email');
  * @since 0.1
  * @file  wp.comments.php
  */
-load_wp_ext('comments');
+x_load_wp_ext('comments');
 
 /**
  * Define any (more generic) shortcodes here. The [gallery] shortcode 
@@ -189,7 +208,7 @@ load_wp_ext('comments');
  * @since 0.1
  * @file  wp.shortcodes.php
  */
-load_wp_ext('shortcodes');
+x_load_wp_ext('shortcodes');
 
 /**
  * User related functions such as customizing profile view or 
@@ -198,7 +217,7 @@ load_wp_ext('shortcodes');
  * @since 0.1
  * @file  wp.user.php
  */
-load_wp_ext('user');
+x_load_wp_ext('user');
 
 
 /**
@@ -207,7 +226,7 @@ load_wp_ext('user');
  * @since 0.1
  * @file  wp.options.php
  */
-load_wp_ext('options');
+x_load_wp_ext('options');
 
 /**
  * Checks for mobile devices and runs functions.
@@ -215,16 +234,16 @@ load_wp_ext('options');
  *
  * @since 0.1
  */
-define('IS_MOBILE', is_mobile());
+define('IS_MOBILE', x_is_mobile());
 
 /**
  *  Targeting for mobile devices
  */
 if(IS_MOBILE){
-  add_filter('template_include', 'template_mobile', 1, 1); 
+  add_filter('template_include', 'xf_template_mobile', 1, 1); 
 
   // One template handles all mobile requests
-  function template_mobile($template) { 
+  function xf_template_mobile($template) { 
     global $post;
     return DIR_TMPL . '/mobile.php'; 
    }
@@ -244,5 +263,5 @@ if(!IS_LIVE){
   define('WP_DEBUG_LOG',     true);  // Turn logging to wp-content/debug.log ON
   */
   
-  load_wp_ext('debug');
+  x_load_wp_ext('debug');
 }

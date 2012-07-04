@@ -21,7 +21,7 @@ if ($_FILES['thumbnail']){
 
 */
 
-function insert_attachment($fh, $post_id, $title, $to_thumb = false) {
+function x_insert_attachment($fh, $post_id, $title, $to_thumb = false) {
   $success = false;
  if($fh['error'] == 0){
       require_once(DIR_ADMIN .'/includes/file.php');

@@ -8,7 +8,7 @@
  * @file  wp.shortcodes.php
  */
 
-function site_shortcode($atts) {
+function xs_site_shortcode($atts) {
    extract(shortcode_atts(array(
        'info' => '',
    ), $atts));
@@ -22,5 +22,5 @@ function site_shortcode($atts) {
    return $return;
 }
 
-add_shortcode('site', 'site_shortcode');
+add_shortcode('site', 'xs_site_shortcode');
 
